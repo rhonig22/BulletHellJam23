@@ -1,4 +1,5 @@
 using BulletFury;
+using BulletFury.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +14,28 @@ public class PlayerController : MonoBehaviour
     private bool isMouseDown = false;
     private readonly float leftBound = 5.5f;
     private readonly float topBound = 4.25f;
+    private readonly int maxCapacity = 10;
     [SerializeField] private BulletManager bulletManager;
+    [SerializeField] private GameObject shieldObject;
+    private Shield shield;
+    private int _currentAmmo = 10;
+    public int CurrentAmmo
+    {
+        get
+        {
+            return _currentAmmo;
+        }
+        private set
+        {
+            _currentAmmo = value;
+            shield.ShieldPercent = (float)value / (float)maxCapacity;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        shield = shieldObject.GetComponent<Shield>();
     }
 
     // Update is called once per frame
@@ -63,10 +80,45 @@ public class PlayerController : MonoBehaviour
 
     private void Fire()
     {
-        if (isMouseDown)
+        if (isMouseDown && CurrentAmmo > 0)
         {
             bulletManager.Spawn(transform.position, transform.up);
         }
     }
 
+    public void WeaponFired()
+    {
+        if (CurrentAmmo > 0)
+        {
+            CurrentAmmo--;
+        }
+    }
+
+    public void BulletCollided(BulletContainer container, BulletCollider collider, GameObject bullet)
+    {
+        bool isEnemy = container.Damage > 0;
+        if (!isEnemy)
+        {
+            if (CurrentAmmo < maxCapacity)
+            {
+                CurrentAmmo++;
+            }
+        }
+        else
+        {
+            if (CurrentAmmo == 0)
+            {
+                Death();
+            }
+            else
+            {
+                CurrentAmmo--;
+            }
+        }
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27a23ae2178c4258a35e0704bcdfe093, type: 3}
-  m_Name: PlayerSpawn
+  m_Name: EnemySpawn
   m_EditorClassIdentifier: 
   fireRate: 0.1
-  burstCount: 1
+  burstCount: 2
   burstDelay: 0.1
   spawnDir: 0
   directionArc: 0
   randomise: 0
   onEdge: 0
-  numSides: 1
+  numSides: 2
   numPerSide: 1
-  radius: 0.35
+  radius: 2
   arc: 0
-  isExpanded: 0
+  isExpanded: 1

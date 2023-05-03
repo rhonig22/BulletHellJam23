@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82dffc9fcebd41c894fc9c65a04b4cda, type: 3}
-  m_Name: PlayerBullets
+  m_Name: GreenBullets
   m_EditorClassIdentifier: 
   mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: c56d86fd3be28724db16d3ece561b4f0, type: 2}
@@ -18,23 +18,23 @@ MonoBehaviour:
   waitToStart: 0
   timeToPlayWhileWaiting: 0
   lifetime: 1
-  speed: 10
+  speed: 4
   moveWithTransform: 0
   rotateWithTransform: 0
   damage: 1
-  size: 0.2
+  size: 0.3
   colliderSize: 1
   spawnFromCentre: 0
   secondsToOriginalPosition: 0
   angularVelocity: 0
-  startColor: {r: 0.26666668, g: 0.8, b: 2.7137256, a: 1}
+  startColor: {r: 0.30980393, g: 0.70980394, b: 0, a: 1}
   useColorOverTime: 0
-  colorCurveUsage: 1
-  colorCurveTime: 0.5
+  colorCurveUsage: 0
+  colorCurveTime: 0
   colorOverTime:
     serializedVersion: 2
-    key0: {r: 0.26666668, g: 0.8, b: 2.7137256, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.30946895, g: 0.70837605, b: 0, a: 1}
+    key1: {r: 0.01934181, g: 0.044273503, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -58,6 +58,7 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   useRotationOverTime: 0
@@ -237,4 +238,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isExpanded: 0
+  isExpanded: 1
