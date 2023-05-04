@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 519420031}
-  manualFire: 0
+  manualFire: 1
   bulletSettings: {fileID: 11400000, guid: 0f762d4f13c5c0f429311b3c0abe87cb, type: 2}
   spawnSettings: {fileID: 11400000, guid: ed0753614f6ae6e498838460c7ca09af, type: 2}
   currentActiveBullets: 0
@@ -486,6 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies:
   - {fileID: 1223896669}
+  player: {fileID: 1821980382}
   enemyBullets: {fileID: 748719271}
 --- !u!1 &1121870153
 GameObject:
