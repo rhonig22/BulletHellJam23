@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePosition;
     private float horizontalInput = 0f;
     private float verticalInput = 0f;
-    private float speed = 10f;
+    private float speed = 8f;
     private bool isDead = false;
     private bool isMouseDown = false;
     private readonly float leftBound = 5.5f;
     private readonly float topBound = 4.25f;
     private readonly int maxCapacity = 10;
+    private readonly int shieldPowerUpCount = 5;
+    public readonly int minThreshold = 3;
     [SerializeField] private BulletManager bulletManager;
     [SerializeField] private GameObject shieldObject;
     private Shield shield;
@@ -120,5 +122,34 @@ public class PlayerController : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("collide");
+        if (isDead)
+            return;
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyCollider collider = collision.gameObject.GetComponentInChildren<EnemyCollider>();
+            if (collider != null && collider.isActive && !collider.isDead)
+                Death();
+        }
+
+        if (collision.gameObject.CompareTag("Shield"))
+        {
+            ShieldPowerUp();
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void ShieldPowerUp()
+    {
+        CurrentAmmo += shieldPowerUpCount;
+        if (CurrentAmmo > maxCapacity)
+        {
+            CurrentAmmo = maxCapacity;
+        }
     }
 }

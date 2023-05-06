@@ -9,16 +9,17 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<GameObject> enemies= new List<GameObject>();
     [SerializeField] private GameObject player;
     [SerializeField] private BulletManager enemyBullets;
-    private readonly float enemyWaitPeriod = 1f;
-    private readonly float enemyYRange = 4f;
-    private readonly float bulletDelay = .05f;
+    private readonly float enemyWaitPeriod = 4f;
+    private readonly float bulletDelay = .1f;
+    private readonly float addEnemyPeriod = 30f;
+    private readonly float horizontalXRange = 1f;
+    private readonly float horizontalYRange = 4f;
+    private readonly float verticalXRange = 5f;
+    private readonly float verticalYRange = 0f;
 
     private void Start()
     {
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            StartCoroutine(startEnemy(i, 0));
-        }
+        StartCoroutine(AddEnemies());
     }
 
     private void Update()
@@ -26,28 +27,88 @@ public class EnemyManager : MonoBehaviour
         
     }
 
+    IEnumerator AddEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            StartCoroutine(startEnemy(i, 1f));
+            yield return new WaitForSeconds(addEnemyPeriod);
+        }
+    }
+
     IEnumerator startEnemy(int index, float delay)
     {
         GameObject enemy = enemies[index];
         EnemyCollider collider = enemy.GetComponentInChildren<EnemyCollider>();
-        collider.startFire.AddListener(() => { StartCoroutine(spawnBullets(enemy));  });
+        collider.startFire.AddListener(() => { StartCoroutine(spawnBullets(enemy, collider));  });
         while (true)
         {
-            yield return new WaitForSeconds(enemyWaitPeriod + delay);
-            delay = 4f;
-            enemy.transform.position = new Vector3(0, Random.Range(-enemyYRange, enemyYRange), 0);
+            yield return new WaitForSeconds(delay);
+            delay = 0;
+            setEnemyOrientation(enemy, collider);
             enemy.GetComponentInChildren<Animator>().SetTrigger("Start");
+            yield return new WaitForSeconds(enemyWaitPeriod);
         }
     }
 
-    IEnumerator spawnBullets(GameObject enemy)
+    IEnumerator spawnBullets(GameObject enemy, EnemyCollider collider)
     {
-        EnemyCollider collider = enemy.GetComponentInChildren<EnemyCollider>();
+        Transform enemyTransform = enemy.transform.GetChild(0);
+        float startDelay = Random.Range(0, .1f);
         while (!collider.isDead && collider.isActive)
         {
+            yield return new WaitForSeconds(startDelay);
+            startDelay = 0;
+            enemyBullets.Spawn(enemyTransform);
             yield return new WaitForSeconds(bulletDelay);
-            enemyBullets.Spawn(enemy.transform.GetChild(0));
+        }
+    }
 
+    private void setEnemyOrientation(GameObject enemy, EnemyCollider collider)
+    {
+        int orientation = Random.Range(0, 4);
+        if (orientation == 0 || orientation == 1)
+        {
+            if (orientation == 0)
+            {
+                enemy.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
+            }
+            else if (orientation == 1)
+            {
+                enemy.transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+            }
+
+            enemy.transform.position = new Vector3(Random.Range(-horizontalXRange, horizontalXRange), Random.Range(-horizontalYRange, horizontalYRange), 0);
+            rotateEnemy(enemy.transform.GetChild(0), collider, true);
+        }
+        else if (orientation == 2 || orientation == 3)
+        {
+            if (orientation == 2)
+            {
+                enemy.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+            }
+            else if (orientation == 3)
+            {
+                enemy.transform.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
+            }
+
+            enemy.transform.position = new Vector3(Random.Range(-verticalXRange, verticalXRange), Random.Range(-verticalYRange, verticalYRange), 0);
+            rotateEnemy(enemy.transform.GetChild(0), collider, false);
+        }
+    }
+
+    private void rotateEnemy(Transform enemyTransform, EnemyCollider collider, bool isHorizontal)
+    {
+        Vector3 perpendicular = player.transform.position - enemyTransform.position;
+        if (isHorizontal)
+            perpendicular.x = 0;
+        else
+            perpendicular.y = 0;
+
+        enemyTransform.rotation = Quaternion.LookRotation(Vector3.forward, perpendicular.normalized);
+        if (collider.isFixedRotation)
+        {
+            collider.setRotation.Invoke();
         }
     }
 }
