@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a23ae2178c4258a35e0704bcdfe093, type: 3}
   m_Name: EnemySpawn
   m_EditorClassIdentifier: 
-  fireRate: 0.1
+  fireRate: 0.001
   burstCount: 1
-  burstDelay: 0.1
+  burstDelay: 0.001
   spawnDir: 0
   directionArc: 0
   randomise: 0
