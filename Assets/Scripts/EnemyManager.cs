@@ -12,10 +12,10 @@ public class EnemyManager : MonoBehaviour
     private readonly float enemyWaitPeriod = 4f;
     private readonly float bulletDelay = .1f;
     private readonly float addEnemyPeriod = 30f;
-    private readonly float horizontalXRange = 1f;
+    private readonly float horizontalXRange = 2f;
     private readonly float horizontalYRange = 4f;
     private readonly float verticalXRange = 5f;
-    private readonly float verticalYRange = 0f;
+    private readonly float verticalYRange = 1f;
 
     private void Start()
     {
