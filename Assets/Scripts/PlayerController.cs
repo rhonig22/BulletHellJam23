@@ -16,11 +16,14 @@ public class PlayerController : MonoBehaviour
     private readonly float leftBound = 5.5f;
     private readonly float topBound = 4.25f;
     private readonly int maxCapacity = 10;
-    private readonly int shieldPowerUpCount = 5;
     public readonly int minThreshold = 3;
     [SerializeField] private BulletManager bulletManager;
     [SerializeField] private GameObject shieldObject;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip lazer;
+    [SerializeField] private AudioClip hit;
+    [SerializeField] private AudioClip death;
     private Shield shield;
     private int _currentAmmo = 10;
     public int CurrentAmmo
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         shield = shieldObject.GetComponent<Shield>();
+        audioSource.volume = DataManager.effectsVolume;
     }
 
     // Update is called once per frame
@@ -86,6 +90,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isMouseDown && CurrentAmmo > 0)
         {
+            audioSource.clip = lazer;
+            audioSource.Play();
             bulletManager.Spawn(transform.position, transform.up);
         }
     }
@@ -100,6 +106,9 @@ public class PlayerController : MonoBehaviour
 
     public void BulletCollided(BulletContainer container, BulletCollider collider, GameObject bullet)
     {
+        if (isDead)
+            return;
+
         bool isEnemy = container.Damage > 0;
         if (!isEnemy)
         {
@@ -117,14 +126,21 @@ public class PlayerController : MonoBehaviour
             else
             {
                 CurrentAmmo--;
+                audioSource.clip = hit;
+                audioSource.Play();
             }
         }
     }
 
     public void Death()
     {
+        if (isDead)
+            return;
+
         isDead = true;
         animator.SetTrigger("Death");
+        audioSource.clip = death;
+        audioSource.Play();
     }
 
     public void DeathFinished()
@@ -155,10 +171,6 @@ public class PlayerController : MonoBehaviour
 
     private void ShieldPowerUp()
     {
-        CurrentAmmo += shieldPowerUpCount;
-        if (CurrentAmmo > maxCapacity)
-        {
-            CurrentAmmo = maxCapacity;
-        }
+        CurrentAmmo = maxCapacity;
     }
 }

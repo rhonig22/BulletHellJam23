@@ -15,7 +15,6 @@ public class GameOverUxManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TMP_InputField playerNameInput;
     private readonly int maxLength = 24;
-    private int timeValue = 1;
     private float waitTime = .5f;
 
     // Start is called before the first frame update
@@ -28,16 +27,15 @@ public class GameOverUxManager : MonoBehaviour
     private IEnumerator LoadScores()
     {
         yield return new WaitForSeconds(waitTime);
-        timeScore.text = (int)DataManager.timer + " x " + timeValue;
+        timeScore.text = (int)DataManager.timer + " x " + DataManager.timeValue;
         yield return new WaitForSeconds(waitTime);
         killsScore.text = DataManager.killCount + " x " + DataManager.killValue;
         yield return new WaitForSeconds(waitTime);
-        bonusScore.text = 0 + " x " + 500;
+        bonusScore.text = DataManager.bonusCount + " x " + DataManager.bonusValue;
         yield return new WaitForSeconds(waitTime);
         totalScore.text = "" + DataManager.Instance.GetScore();
         DataManager.Instance.SubmitLootLockerScore(DataManager.Instance.GetScore());
     }
-
 
     public void EditNameClicked()
     {

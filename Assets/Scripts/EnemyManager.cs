@@ -8,7 +8,9 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemies= new List<GameObject>();
     [SerializeField] private GameObject player;
-    [SerializeField] private BulletManager enemyBullets;
+    [SerializeField] private BulletManager greenEnemyBullets;
+    [SerializeField] private BulletManager redEnemyBullets;
+    private List<GameObject> activeEnemies = new List<GameObject>();
     private readonly float enemyWaitPeriod = 4f;
     private readonly float bulletDelay = .1f;
     private readonly float addEnemyPeriod = 30f;
@@ -29,8 +31,9 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator AddEnemies()
     {
-        for (int i = 0; i < enemies.Count; i++)
+        while(enemies.Count > 0)
         {
+            int i = Random.Range(0, enemies.Count);
             StartCoroutine(startEnemy(i, 1f));
             yield return new WaitForSeconds(addEnemyPeriod);
         }
@@ -39,6 +42,8 @@ public class EnemyManager : MonoBehaviour
     IEnumerator startEnemy(int index, float delay)
     {
         GameObject enemy = enemies[index];
+        enemies.RemoveRange(index, 1);
+        activeEnemies.Add(enemy);
         EnemyCollider collider = enemy.GetComponentInChildren<EnemyCollider>();
         collider.startFire.AddListener(() => { StartCoroutine(spawnBullets(enemy, collider));  });
         while (true)
@@ -59,7 +64,11 @@ public class EnemyManager : MonoBehaviour
         {
             yield return new WaitForSeconds(startDelay);
             startDelay = 0;
-            enemyBullets.Spawn(enemyTransform);
+            if (collider.bulletSettings == greenEnemyBullets.GetBulletSettings())
+                greenEnemyBullets.Spawn(enemyTransform);
+            else if (collider.bulletSettings == redEnemyBullets.GetBulletSettings())
+                redEnemyBullets.Spawn(enemyTransform);
+
             yield return new WaitForSeconds(bulletDelay);
         }
     }

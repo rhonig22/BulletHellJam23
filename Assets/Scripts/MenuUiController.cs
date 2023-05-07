@@ -35,4 +35,14 @@ public class MenuUiController : MonoBehaviour
     {
         SceneManager.LoadScene(leaderboardScene);
     }
+
+    public void SetMusicVolume(float vol)
+    {
+        GameObject.Find("MusicPlayer").GetComponent<AudioSource>().volume = vol;
+    }
+
+    public void SetEffectsVolume(float vol)
+    {
+        DataManager.Instance.SetEffectsVolume(vol);
+    }
 }
