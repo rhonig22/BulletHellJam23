@@ -11,13 +11,14 @@ public class DataManager : MonoBehaviour
     public static int killCount { get; private set; } = 0;
     public static bool dataRetrieved { get; private set; } = false;
     public static UserData playerData { get; private set; }
-    public static bool timerStart = true;
+    public static bool timerStart = false;
 
     public static int currentLevel = 1;
     public static float timer { get; private set; } = 0;
     public static float effectsVolume { get; private set; } = 1f;
     public static UnityEvent gameOver = new UnityEvent();
     public static UnityEvent userDataRetrieved = new UnityEvent();
+    public static readonly int killValue = 100;
     private readonly string leaderboardID = "bullethell_leaderboard";
 
     // Start is called before the first frame update
@@ -68,7 +69,7 @@ public class DataManager : MonoBehaviour
 
     public int GetScore()
     {
-        return (int)timer + killCount * 100;
+        return (int)timer + killCount * killValue;
     }
 
     private void StartLootLockerSession()

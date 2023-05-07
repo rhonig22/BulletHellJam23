@@ -3,6 +3,7 @@ using BulletFury.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public readonly int minThreshold = 3;
     [SerializeField] private BulletManager bulletManager;
     [SerializeField] private GameObject shieldObject;
+    [SerializeField] private Animator animator;
     private Shield shield;
     private int _currentAmmo = 10;
     public int CurrentAmmo
@@ -121,7 +123,14 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
-        Destroy(gameObject);
+        isDead = true;
+        animator.SetTrigger("Death");
+    }
+
+    public void DeathFinished()
+    {
+        gameObject.SetActive(false);
+        SceneManager.LoadScene(MenuUiController.gameOverScene);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -134,7 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             EnemyCollider collider = collision.gameObject.GetComponentInChildren<EnemyCollider>();
             if (collider != null && collider.isActive && !collider.isDead)
-                Death();
+                CurrentAmmo = 0;
         }
 
         if (collision.gameObject.CompareTag("Shield"))

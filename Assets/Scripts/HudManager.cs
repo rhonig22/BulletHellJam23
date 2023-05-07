@@ -9,6 +9,12 @@ public class HudManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
 
+    private void Start()
+    {
+        DataManager.Instance.Restart();
+        DataManager.Instance.StartTimer();
+    }
+
     // Update is called once per frame
     void Update()
     {
