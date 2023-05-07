@@ -16,10 +16,14 @@ public class EnemyCollider : MonoBehaviour
     public UnityEvent setRotation = new UnityEvent();
     public bool isFixedRotation;
     [SerializeField] Animator animator;
+    [SerializeField] public SpawnSettings spawnSettings;
+    [SerializeField] public BulletSettings bulletSettings;
+    [SerializeField] private AudioSource audioSource;
 
     private void Start()
     {
         setRotation.AddListener(() => { tempRotation = transform.rotation; } );
+        audioSource.volume = DataManager.effectsVolume;
     }
 
     public void BulletCollided(BulletContainer container, BulletCollider collider, GameObject bullet)
@@ -31,6 +35,7 @@ public class EnemyCollider : MonoBehaviour
             tempPosition = transform.position;
             animator.SetTrigger("Dead");
             DataManager.Instance.IncreaseKill();
+            audioSource.Play();
             isDead= true;
         }
     }
