@@ -19,6 +19,7 @@ public class EnemyCollider : MonoBehaviour
     [SerializeField] public SpawnSettings spawnSettings;
     [SerializeField] public BulletSettings bulletSettings;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private BulletCollider bulletCollider;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class EnemyCollider : MonoBehaviour
         if (container.Damage == 0)
         {
             tempPosition = transform.position;
+            bulletCollider.enabled = false;
             animator.SetTrigger("Dead");
             DataManager.Instance.IncreaseKill();
             audioSource.Play();
@@ -64,6 +66,7 @@ public class EnemyCollider : MonoBehaviour
     {
         isActive = true;
         isDead = false;
+        bulletCollider.enabled = true;
     }
 
     public void StartBullets()

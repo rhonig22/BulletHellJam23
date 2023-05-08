@@ -41,8 +41,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator startEnemy(int index, float delay)
     {
-        GameObject enemy = enemies[index];
-        enemies.RemoveRange(index, 1);
+        GameObject enemy = Instantiate(enemies[index]);
         activeEnemies.Add(enemy);
         EnemyCollider collider = enemy.GetComponentInChildren<EnemyCollider>();
         collider.startFire.AddListener(() => { StartCoroutine(spawnBullets(enemy, collider));  });

@@ -128,7 +128,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090020219966871668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9add1c9d0cf8e4cb28a0121845c457c6, type: 3}
   m_Name: 
@@ -206,6 +206,7 @@ MonoBehaviour:
   spawnSettings: {fileID: 11400000, guid: 0730dfbdbff50cb49908249d50d6fe2b, type: 2}
   bulletSettings: {fileID: 11400000, guid: ad1163b89237c3e4b8d2c2c5c5459187, type: 2}
   audioSource: {fileID: 5913992825860695927}
+  bulletCollider: {fileID: 7448414804031907833}
 --- !u!61 &3294360475152924480
 BoxCollider2D:
   m_ObjectHideFlags: 0
