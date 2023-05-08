@@ -128,7 +128,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090020219966871668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9add1c9d0cf8e4cb28a0121845c457c6, type: 3}
   m_Name: 
@@ -201,11 +201,12 @@ MonoBehaviour:
   setRotation:
     m_PersistentCalls:
       m_Calls: []
-  isFixedRotation: 0
+  isFixedRotation: 1
   animator: {fileID: 9051261197283633476}
   spawnSettings: {fileID: 11400000, guid: ed0753614f6ae6e498838460c7ca09af, type: 2}
   bulletSettings: {fileID: 11400000, guid: 0f762d4f13c5c0f429311b3c0abe87cb, type: 2}
   audioSource: {fileID: 4416741507200551490}
+  bulletCollider: {fileID: 7448414804031907833}
 --- !u!61 &3294360475152924480
 BoxCollider2D:
   m_ObjectHideFlags: 0
