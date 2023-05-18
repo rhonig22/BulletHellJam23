@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip lazer;
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip death;
+    [SerializeField] private ParticleSystem shieldParticles;
+    [SerializeField] private ParticleSystem hitParticles;
     private Shield shield;
     private int _currentAmmo = 10;
     public int CurrentAmmo
@@ -36,6 +38,14 @@ public class PlayerController : MonoBehaviour
         {
             _currentAmmo = value;
             shield.ShieldPercent = (float)value / (float)maxCapacity;
+            if (value == 0)
+            {
+                animator.SetBool("IsEmpty", true);
+            }
+            else
+            {
+                animator.SetBool("IsEmpty", false);
+            }
         }
     }
 
@@ -115,6 +125,7 @@ public class PlayerController : MonoBehaviour
             if (CurrentAmmo < maxCapacity)
             {
                 CurrentAmmo++;
+                shieldParticles.Play();
             }
         }
         else
@@ -128,6 +139,7 @@ public class PlayerController : MonoBehaviour
                 CurrentAmmo--;
                 audioSource.clip = hit;
                 audioSource.Play();
+                hitParticles.Play();
             }
         }
     }
@@ -165,6 +177,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Shield"))
         {
             ShieldPowerUp();
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Bonus"))
+        {
+            DataManager.Instance.increaseBonus();
             Destroy(collision.gameObject);
         }
     }

@@ -503,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1821980382}
   shieldPowerUp: {fileID: 242573985817445208, guid: c6171eb3b04d69d49ab0dba213da5ed2, type: 3}
+  bonusPowerUp: {fileID: 260805519940645565, guid: cc1c57d2a678e3d4fa4d62624bf66db7, type: 3}
 --- !u!4 &814183864
 Transform:
   m_ObjectHideFlags: 0
@@ -1675,14 +1676,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8238496065228171199, guid: b87f8310d0b671445a9306a5a02ebd19, type: 3}
-      propertyPath: hit
-      value: 
-      objectReference: {fileID: 8300000, guid: eabb9d021d68dc248a6d6777f4c14822, type: 3}
-    - target: {fileID: 8238496065228171199, guid: b87f8310d0b671445a9306a5a02ebd19, type: 3}
-      propertyPath: death
-      value: 
-      objectReference: {fileID: 8300000, guid: 3cb304131bfb35b4086e2428d20698dd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
