@@ -71,13 +71,14 @@ public class DataManager : MonoBehaviour
     public void Restart()
     {
         killCount = 0;
+        bonusCount = 0;
         timerStart = false;
         timer = 0;
     }
 
     public int GetScore()
     {
-        return (int)timer * timeValue + killCount * killValue;
+        return (int)timer * timeValue + killCount * killValue + bonusCount * bonusValue;
     }
 
     private void StartLootLockerSession()
