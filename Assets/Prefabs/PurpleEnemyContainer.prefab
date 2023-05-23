@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7794806034701310466}
   m_Layer: 0
-  m_Name: RedEnemyContainer
+  m_Name: PurpleEnemyContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 81a78db200000000dbf132d2
-  m_LightCookieSprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
+  m_LightCookieSprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
@@ -98,30 +98,30 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
-  - position: {x: 0.015625, y: 0.5, z: 0}
+  - position: {x: 0.0234375, y: 0.25, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.515625, y: 1}
-  - position: {x: 0.44140625, y: -0.25390625, z: 0}
+    uv: {x: 0.5234375, y: 1}
+  - position: {x: 0.5, y: -0.01171875, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.94140625, y: 0.24609375}
-  - position: {x: 0.44140625, y: 0.25390625, z: 0}
+    uv: {x: 1, y: 0.4765625}
+  - position: {x: 0.5, y: 0.01171875, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.94140625, y: 0.75390625}
-  - position: {x: 0.015625, y: -0.5, z: 0}
+    uv: {x: 1, y: 0.5234375}
+  - position: {x: 0.0234375, y: -0.25, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.515625, y: 0}
-  - position: {x: -0.015625, y: 0.5, z: 0}
+    uv: {x: 0.5234375, y: 0}
+  - position: {x: -0.0234375, y: 0.25, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.484375, y: 1}
-  - position: {x: -0.015625, y: -0.5, z: 0}
+    uv: {x: 0.4765625, y: 1}
+  - position: {x: -0.0234375, y: -0.25, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.484375, y: 0}
-  - position: {x: -0.44140625, y: 0.25390625, z: 0}
+    uv: {x: 0.4765625, y: 0}
+  - position: {x: -0.5, y: 0.01171875, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.05859375, y: 0.75390625}
-  - position: {x: -0.44140625, y: -0.25390625, z: 0}
+    uv: {x: 0, y: 0.5234375}
+  - position: {x: -0.5, y: -0.01171875, z: 0}
     color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0.05859375, y: 0.24609375}
+    uv: {x: 0, y: 0.4765625}
   - position: {x: 0, y: 0, z: 0}
     color: {r: 0, g: 0, b: 0, a: 0}
     uv: {x: 0, y: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Triangles: 070006000500040005000600030005000400000003000400010003000000020001000000
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.44140625, y: 0.5, z: 0}
+    m_Extent: {x: 0.5, y: 0.25, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -249,8 +249,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2135585597343286014, guid: 4b2a04fdbe0ef4d8da8f90eaca817cd1, type: 3}
-  m_Color: {r: 0.8627451, g: 0.22745098, b: 0.10980392, a: 1}
+  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+  m_Color: {r: 0.9098039, g: 0.07450981, b: 0.47843137, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Bits: 1
   shape: 1
   radius: 0.5
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 1, y: 0.5, z: 1}
   destroyBullet: 1
   center: {x: 0, y: 0, z: 0}
   pointA: {x: 0, y: 0, z: 0}
@@ -311,7 +311,7 @@ Animator:
   m_GameObject: {fileID: 8090020219966871668}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68e70fc07fca7d0469d3875588fc8182, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1411429e1342a21438c6eadf2e328037, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -342,8 +342,8 @@ MonoBehaviour:
       m_Calls: []
   isFixedRotation: 0
   animator: {fileID: 9051261197283633476}
-  spawnSettings: {fileID: 11400000, guid: 0730dfbdbff50cb49908249d50d6fe2b, type: 2}
-  bulletSettings: {fileID: 11400000, guid: ad1163b89237c3e4b8d2c2c5c5459187, type: 2}
+  spawnSettings: {fileID: 11400000, guid: 8fc5b258e8511d74f9a9a3ba9fe8e640, type: 2}
+  bulletSettings: {fileID: 11400000, guid: eecadf89de47f804b947fcf613663e36, type: 2}
   audioSource: {fileID: 5913992825860695927}
   bulletCollider: {fileID: 7448414804031907833}
 --- !u!61 &3294360475152924480
@@ -382,14 +382,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8828125, y: 1}
+    oldSize: {x: 1, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!82 &5913992825860695927
 AudioSource:

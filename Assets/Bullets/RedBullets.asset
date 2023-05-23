@@ -17,8 +17,8 @@ MonoBehaviour:
   plane: 0
   waitToStart: 0
   timeToPlayWhileWaiting: 0
-  lifetime: 6
-  speed: 2
+  lifetime: 5
+  speed: 1.5
   moveWithTransform: 0
   rotateWithTransform: 0
   damage: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
   spawnFromCentre: 0
   secondsToOriginalPosition: 0
   angularVelocity: 0
-  startColor: {r: 0.7156938, g: 0.04091521, b: 0.010960094, a: 1}
+  startColor: {r: 2.862775, g: 0.16366084, b: 0.043840375, a: 1}
   useColorOverTime: 0
   colorCurveUsage: 0
   colorCurveTime: 0

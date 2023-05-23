@@ -8,7 +8,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] GameObject shieldPowerUp;
     [SerializeField] GameObject bonusPowerUp;
     private PlayerController playerController;
-    private float shieldWaitTime = 5f;
+    private float shieldWaitTime = 4f;
     private float bonusWaitTime = 60f;
     private float shieldCooldownTime = 10f;
     private bool isWaiting = false;
@@ -40,8 +40,10 @@ public class PowerUpManager : MonoBehaviour
         {
             SpawnShieldPowerUp();
             yield return new WaitForSeconds(shieldCooldownTime);
-            isWaiting= false;
+            isWaiting = false;
         }
+        else
+            isWaiting = false;
     }
 
     IEnumerator SpawnBonusPowerUp()
