@@ -14,7 +14,7 @@ public class GameOverUxManager : MonoBehaviour
     [SerializeField] GameObject EditName;
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TMP_InputField playerNameInput;
-    private readonly int maxLength = 24;
+    private readonly int maxLength = 12;
     private float waitTime = .5f;
 
     // Start is called before the first frame update

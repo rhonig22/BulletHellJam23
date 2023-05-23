@@ -27,7 +27,7 @@ MonoBehaviour:
   spawnFromCentre: 0
   secondsToOriginalPosition: 0
   angularVelocity: 0
-  startColor: {r: 0.30980393, g: 0.70980394, b: 0, a: 1}
+  startColor: {r: 1.2392157, g: 2.8392158, b: 0, a: 1}
   useColorOverTime: 0
   colorCurveUsage: 0
   colorCurveTime: 0

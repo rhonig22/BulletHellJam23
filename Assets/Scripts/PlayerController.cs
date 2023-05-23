@@ -8,9 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Vector3 mousePosition;
-    private float horizontalInput = 0f;
-    private float verticalInput = 0f;
-    private float speed = 8f;
+    private Vector2 movementInput;
+    private float speed = 7.5f;
     private bool isDead = false;
     private bool isMouseDown = false;
     private readonly float leftBound = 5.5f;
@@ -62,8 +61,7 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         isMouseDown = Input.GetMouseButton(0);
     }
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
-        Move(horizontalInput * speed * Time.fixedDeltaTime, verticalInput * speed * Time.fixedDeltaTime);
+        Move(movementInput.x * speed * Time.fixedDeltaTime, movementInput.y * speed * Time.fixedDeltaTime);
         Rotate();
         Fire();
     }
@@ -130,17 +128,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (CurrentAmmo == 0)
-            {
-                Death();
-            }
-            else
-            {
-                CurrentAmmo--;
-                audioSource.clip = hit;
-                audioSource.Play();
-                hitParticles.Play();
-            }
+            BulletHit();
+        }
+    }
+
+    private void BulletHit()
+    {
+        if (CurrentAmmo == 0)
+        {
+            Death();
+        }
+        else
+        {
+            CurrentAmmo--;
+            audioSource.clip = hit;
+            audioSource.Play();
+            hitParticles.Play();
         }
     }
 
@@ -163,7 +166,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collide");
         if (isDead)
             return;
 
@@ -171,7 +173,9 @@ public class PlayerController : MonoBehaviour
         {
             EnemyCollider collider = collision.gameObject.GetComponentInChildren<EnemyCollider>();
             if (collider != null && collider.isActive && !collider.isDead)
-                CurrentAmmo = 0;
+            {
+                BulletHit();
+            }
         }
 
         if (collision.gameObject.CompareTag("Shield"))

@@ -3,6 +3,7 @@ using BulletFury;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Search;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -10,14 +11,19 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private BulletManager greenEnemyBullets;
     [SerializeField] private BulletManager redEnemyBullets;
+    [SerializeField] private BulletManager purpleEnemyBullets;
     private List<GameObject> activeEnemies = new List<GameObject>();
     private readonly float enemyWaitPeriod = 4f;
-    private readonly float bulletDelay = .1f;
+    private readonly float purpleEnemyWaitPeriod = 6f;
+    private readonly float greenBulletDelay = .1f;
+    private readonly float redBulletDelay = .15f;
+    private readonly float purpleBulletDelay = .5f;
     private readonly float addEnemyPeriod = 30f;
     private readonly float horizontalXRange = 2f;
-    private readonly float horizontalYRange = 4f;
-    private readonly float verticalXRange = 5f;
+    private readonly float horizontalYRange = 3f;
+    private readonly float verticalXRange = 4f;
     private readonly float verticalYRange = 1f;
+    private readonly float playerBounds = .5f;
 
     private void Start()
     {
@@ -51,7 +57,13 @@ public class EnemyManager : MonoBehaviour
             delay = 0;
             setEnemyOrientation(enemy, collider);
             enemy.GetComponentInChildren<Animator>().SetTrigger("Start");
-            yield return new WaitForSeconds(enemyWaitPeriod);
+            float waitPeriod = enemyWaitPeriod;
+            if (collider.bulletSettings == purpleEnemyBullets.GetBulletSettings())
+            {
+                waitPeriod = purpleEnemyWaitPeriod;
+            }
+
+            yield return new WaitForSeconds(waitPeriod);
         }
     }
 
@@ -63,10 +75,20 @@ public class EnemyManager : MonoBehaviour
         {
             yield return new WaitForSeconds(startDelay);
             startDelay = 0;
-            if (collider.bulletSettings == greenEnemyBullets.GetBulletSettings())
+            float bulletDelay = greenBulletDelay;
+            if (collider.bulletSettings == greenEnemyBullets.GetBulletSettings()) {
                 greenEnemyBullets.Spawn(enemyTransform);
-            else if (collider.bulletSettings == redEnemyBullets.GetBulletSettings())
+                bulletDelay = greenBulletDelay;
+            }
+            else if (collider.bulletSettings == redEnemyBullets.GetBulletSettings()) {
                 redEnemyBullets.Spawn(enemyTransform);
+                bulletDelay = redBulletDelay;
+            }
+            else if (collider.bulletSettings == purpleEnemyBullets.GetBulletSettings())
+            {
+                purpleEnemyBullets.Spawn(enemyTransform);
+                bulletDelay = purpleBulletDelay;
+            }
 
             yield return new WaitForSeconds(bulletDelay);
         }
@@ -87,6 +109,7 @@ public class EnemyManager : MonoBehaviour
             }
 
             enemy.transform.position = new Vector3(Random.Range(-horizontalXRange, horizontalXRange), Random.Range(-horizontalYRange, horizontalYRange), 0);
+            checkOverlappingPlayer(enemy);
             rotateEnemy(enemy.transform.GetChild(0), collider, true);
         }
         else if (orientation == 2 || orientation == 3)
@@ -101,7 +124,20 @@ public class EnemyManager : MonoBehaviour
             }
 
             enemy.transform.position = new Vector3(Random.Range(-verticalXRange, verticalXRange), Random.Range(-verticalYRange, verticalYRange), 0);
+            checkOverlappingPlayer(enemy);
             rotateEnemy(enemy.transform.GetChild(0), collider, false);
+        }
+    }
+
+    private void checkOverlappingPlayer(GameObject enemy)
+    {
+        Vector3 diff = enemy.transform.GetChild(0).position - player.transform.position;
+        if (diff.magnitude <= playerBounds)
+        {
+            Vector3 pos = enemy.transform.position;
+            pos += 1.5f * diff;
+            Debug.Log("overlap: " + pos);
+            enemy.transform.position = pos;
         }
     }
 
